@@ -3,16 +3,25 @@ const Post= require("../models/post")
 
 exports.getPosts = (req, res) => {
     console.log("huhijijijiji");
-    const posts = Post.find()
+    const posts = Post.find({},(err,data)=>{
+        if(err){
+            reject(err);
 
-    
-    .select("_id title body")
-    .then(posts => {
-        console.log(posts);
-        res.json({posts: posts});
+        }
+        else{
+            res.json({posts:data})
+        }
 
     })
-    .catch(err => console.log(err));
+
+    
+    // .select("_id title body")
+    // .then(posts => {
+    //     console.log(posts);
+    //     res.json({posts: posts});
+
+    // })
+    // .catch(err => console.log(err));
 };
 
 exports.createPost = (req, res) => {
@@ -24,4 +33,23 @@ exports.createPost = (req, res) => {
     })
 
 };
- 
+
+exports.deletePosts = (req, res) => {
+    console.log("hdeletee");
+    const posts = Post.findByIdAndRemove(req.params.id,(err) => {
+        if (err) {
+
+            console.err(err)
+        } else {
+            console.log(`Deleted article ${req.params.id} successfully`);
+        }
+    });
+
+
+    
+
+};
+
+// exports.editPosts(){
+    
+// }

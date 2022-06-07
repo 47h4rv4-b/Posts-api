@@ -25,7 +25,7 @@ mongoose.connection.on('error', err=>{
 
   app.use(morgan("dev"));
   app.use(bodyparser.json());
-  app.use(cors())
+  app.use(cors());
   // app.use(express.json())
   app.use(expressValidator());
   app.use("/", postroutes);
